@@ -5,9 +5,9 @@ from django.db import models
 class Product(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
-    price = models.FloatField()
     image = models.FileField(upload_to="images/")
-
+    price = models.FloatField()
+    stock = models.IntegerField(default=0)
     class Meta:
         db_table = "products"
     

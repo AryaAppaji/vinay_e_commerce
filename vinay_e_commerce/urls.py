@@ -18,9 +18,13 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from my_store.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('Login/',login_view, name='login'),
+    path('Logout/',logout_view, name='logout'),
+    path('product-list', products_page, name="products_page")
 ]
 
 if settings.DEBUG:
