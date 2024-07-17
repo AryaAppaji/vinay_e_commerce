@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'vinay_e_commerce.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'vinay_e_commerce.django.local')
 
 application = get_asgi_application()
