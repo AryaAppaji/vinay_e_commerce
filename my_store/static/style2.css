@@ -1,0 +1,54 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+nav{
+    background-image: linear-gradient(45deg, #02AABD, #00CDAC);
+}
+
+nav ul{
+    text-align: right;
+}
+
+nav ul li{
+    display: inline-block;
+    padding: 10px 20px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: black;
+}
+
+input[type="search"]{
+    padding: 10px;
+    border-radius: 18px;
+    border: solid black 1px;
+    box-shadow:  inset 0px 0px 3px grey;
+}
+
+input[type="submit"],button{
+    padding: 10px;
+    border-radius: 18px;
+    border: solid black 1px;
+    background-image: linear-gradient(45deg, #02AABD, #00CDAC);
+    box-shadow:  3px 3px 3px grey;
+}
+
+li:hover{
+    background-color: white;
+}
+
+
+.order-button{
+    background-image: linear-gradient(45deg, #02AABD, #00CDAC);
+    box-shadow:  3px 3px 3px grey;
+    padding: 10px;
+    border-radius: 18px;
+    border: solid black 1px;
+}

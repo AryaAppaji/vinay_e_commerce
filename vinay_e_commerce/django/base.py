@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'my_store.apps.MyStoreConfig'
+    'my_store'
 ]
 
 MIDDLEWARE = [
@@ -55,9 +55,7 @@ ROOT_URLCONF = 'vinay_e_commerce.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, "templates")
-        ],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -82,7 +80,8 @@ DATABASES = {
         'NAME': 'sqllite',
         'USER': 'root',
         'PASSWORD': '',
-        'HOST': 'localhost'
+        'HOST': 'localhost',
+        'PORT':1234
     }
 }
 

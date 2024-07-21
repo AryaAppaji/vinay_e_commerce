@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vinay Zone - Cart</title>
+    {% csrf_token %} {% load static %}
+    <link rel="stylesheet" href="{% static 'style2.css' %}" />
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href={% url "show_store" %}>Shop</a></li>
+        <li><a href="#">Cart</a></li>
+        <li><a href="#">My Orders</a></li>
+        {% if login_status %}
+        <li><a href="{% url 'logout_user' %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url 'login_page' %}">Login</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    <br />
+    <center>
+      <form action="" method="POST">
+        {% csrf_token %}
+        <input type="search" placeholder="Search..." size="50" />
+        <input type="submit" value="Search" />
+      </form>
+    </center>
+    <br />
+    <table>
+      {% for product in products %}
+      <tr>
+        <td>
+          <img
+            src="{{MEDIA_URL}}{{product.image.url}}"
+            width="300px"
+            height="180px"
+          />
+        </td>
+        <td>
+          <b>{{product.name}}</b><br />
+          <p>{{product.description}}</p>
+          <p>Rs. {{product.price}}</p>
+          <br />
+          <form action="" method="POST">
+            {% csrf_token %}
+            <button type="submit" value="{{product.id}}">Add to Cart</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

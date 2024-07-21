@@ -22,9 +22,10 @@ from my_store.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('Login/',login_view, name='login'),
-    path('Logout/',logout_view, name='logout'),
-    path('product-list', products_page, name="products_page")
+    path('Login/',getLoginForm, name="login_page"),
+    path('login-user', loginUser, name='login_user'),
+    path('Logout/', logoutUser, name='logout_user'),
+    path('', showStore, name='show_store'),
 ]
 
 if settings.DEBUG:

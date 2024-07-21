@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vinay Zone - Login</title>
+    {% csrf_token %}
+    {% load static %} <link rel="stylesheet" href={% static "style.css" %}>
+  </head>
+  <body>
+  <center>
+    <h1>Vinay Zone</h1>
+    <fieldset>
+      <legend>LOGIN</legend>
+      <form action={% url "login_user" %} method="post">
+        {% csrf_token %}
+        <input
+          type="text"
+          name="user_name"
+          id=""
+          class="form-control"
+          size="28"
+          placeholder="Enter Email"
+          required
+        />
+        <br /><br />
+        <input
+          type="password"
+          name="password"
+          id=""
+          class="form-control"
+          size="28"
+          placeholder="Enter Password"
+          required
+        /><br /><br />
+        
+        {% if message %}
+          <p>{{message}}</p>
+        {% endif %}
+        
+        <input type="submit" value="LOGIN" />
+      </form>
+    </fieldset>
+    <center>
+  </body>
+</html>
