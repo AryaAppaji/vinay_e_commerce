@@ -37,6 +37,8 @@
         {% if message %}
           <p>{{message}}</p>
         {% endif %}
+
+        <a href={% url "registration_page" %}>Don't have an account? Register</a><br><br>
         
         <input type="submit" value="LOGIN" />
       </form>
