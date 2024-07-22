@@ -11,6 +11,7 @@
         <li><a href="#">Shop</a></li>
         <li><a href="#">Cart</a></li>
         <li><a href="#">My Orders</a></li>
+        <li><a href="{% url 'registration_page' %}">Register</a></li>
         {% if login_status %}
         <li><a href="{% url 'logout_user' %}">Logout</a></li>
         {% else %}
@@ -42,12 +43,7 @@
           <p>{{product.description}}</p>
           <p>Rs. {{product.price}}</p>
           <br />
-          <button
-            type="submit"
-            value="{{product.id}}"
-            onclick="handleClick()"
-            id="add_to_cart"
-          >
+          <button type="submit" value="{{product.id}}" id="add_to_cart">
             Add to Cart
           </button>
         </td>

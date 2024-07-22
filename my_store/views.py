@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Product
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import User
+from .models import Product, BillingDetails
 
 def getLoginForm(request):
     return render(request, "login_page.html")
@@ -33,3 +35,20 @@ def showStore(request):
         "products": products,
         "login_status": user_logged_in
     })
+
+def getRegistrationForm(request):
+    return render(request, "registration.html")
+
+def registerUser(request):
+    name = request.POST.get("name")
+    user_name = request.POST.get("user_name")
+    password = request.POST.get("password")
+    mobile_number  = request.POST.get("mobile_number")
+    address = request.POST.get("address")
+
+    user = User.objects.create(username = user_name, password = make_password(password))
+
+    user_details = BillingDetails.objects.create(user_id = user, name=name,contact_no=mobile_number, address=address)
+
+    if user and user_details:
+        return redirect("login_page")

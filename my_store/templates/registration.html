@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinay Zone - Register</title>
+    {% csrf_token %}
+    {% load static %}
+    <link rel="stylesheet" href={% static "style3.css" %}>
+</head>
+<body>
+    <nav>
+        <ul>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Cart</a></li>
+          <li><a href="#">My Orders</a></li>
+          <li><a href="{% url 'registration_page' %}">Register</a></li>
+          {% if login_status %}
+          <li><a href="{% url 'logout_user' %}">Logout</a></li>
+          {% else %}
+          <li><a href="{% url 'login_page' %}">Login</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+      <br>
+    <center>
+        <fieldset>
+            <h1>REGISTER</h1>
+            <form action={%url "register_user" %} method="post">
+                {% csrf_token %}
+                <input type="text" name="name" placeholder="Enter Name" size="50" required><br><br>
+                <input type="text" name="user_name" placeholder="Enter Username" size="50" required><br><br>
+                <input type="password" name="password" placeholder="Enter Password" size="50" required><br><br>
+                <input type="number" name="mobile_number" placeholder="Enter Mobile Number" required><br><br>
+                <textarea placeholder="Address" name="address" rows="8" cols="46" required></textarea><br><br>
+                <input type="submit" value="Register">
+            </form>
+        </fieldset>
+    </center>
+</body>
+</html>
