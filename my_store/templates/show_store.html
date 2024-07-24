@@ -9,7 +9,11 @@
     <nav>
       <ul>
         <li><a href="#">Shop</a></li>
-        <li><a href="#">Cart</a></li>
+        <li><a href="{% url 'show_cart' %}">Cart
+          {% if cart_count > 0 %}
+            ({{cart_count}})
+          {% endif %}
+          </a></li>
         <li><a href="#">My Orders</a></li>
         <li><a href="{% url 'registration_page' %}">Register</a></li>
         {% if login_status %}
@@ -43,9 +47,12 @@
           <p>{{product.description}}</p>
           <p>Rs. {{product.price}}</p>
           <br />
-          <button type="submit" value="{{product.id}}" id="add_to_cart">
-            Add to Cart
-          </button>
+          <form action={% url "add_to_cart" %} method="POST">
+            {% csrf_token %}
+            <button type="submit" name="product_id" value="{{product.id}}" id="add_to_cart">
+              Add to Cart
+            </button>
+          </form>
         </td>
       </tr>
       {% endfor %}

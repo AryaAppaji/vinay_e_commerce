@@ -9,7 +9,10 @@
     <nav>
       <ul>
         <li><a href={% url "show_store" %}>Shop</a></li>
-        <li><a href="#">Cart</a></li>
+        <li><a href="#">Cart
+          {% if cart_count > 0 %}
+            ({{cart_count}})
+          {% endif %}
         <li><a href="#">My Orders</a></li>
         {% if login_status %}
         <li><a href="{% url 'logout_user' %}">Logout</a></li>
@@ -42,9 +45,9 @@
           <p>{{product.description}}</p>
           <p>Rs. {{product.price}}</p>
           <br />
-          <form action="" method="POST">
+          <form action={% url "remove_from_cart" %} method="POST">
             {% csrf_token %}
-            <button type="submit" value="{{product.id}}">Add to Cart</button>
+            <button type="submit" value="{{product.id}}">Remove from Cart</button>
           </form>
         </td>
       </tr>
