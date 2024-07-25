@@ -45,9 +45,9 @@
           <p>{{product.description}}</p>
           <p>Rs. {{product.price}}</p>
           <br />
-          <form action={% url "remove_from_cart" %} method="POST">
+          <form action="{% url 'remove_from_cart' product.id %}" method="POST">
             {% csrf_token %}
-            <button type="submit" value="{{product.id}}">Remove from Cart</button>
+            <button type="submit">Remove from Cart</button>
           </form>
         </td>
       </tr>

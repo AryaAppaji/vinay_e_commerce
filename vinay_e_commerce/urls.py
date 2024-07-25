@@ -29,7 +29,7 @@ urlpatterns = [
     path('register/', getRegistrationForm, name="registration_page"),
     path('register-user/', registerUser, name="register_user"),
     path('add-to-cart/', addToCart, name="add_to_cart"),
-    path('remove-from-cart/', removeFromCart, name="remove_from_cart"),
+    path('remove-from-cart/<product_id>/', removeFromCart, name="remove_from_cart"),
     path('cart/', getCart, name="show_cart")
 ]
 
