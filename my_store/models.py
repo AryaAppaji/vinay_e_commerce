@@ -23,3 +23,26 @@ class BillingDetails(models.Model):
     contact_no = models.CharField(max_length=10)
     class Meta:
         db_table = 'billing_details'
+
+
+class Order(models.Model):
+    user = models.ForeignKey(User, models.CASCADE)
+    customer_name = models.CharField(max_length=30)
+    contact_number = models.CharField(max_length=10)
+    customer_address = models.TextField()
+    date = models.DateField(auto_now_add=True)
+    total_amount = models.FloatField()
+
+    class Meta:
+        db_table = 'orders'  
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, models.CASCADE)
+    item_name = models.CharField(max_length=50)
+    description = models.TextField()
+    image_path = models.CharField()
+    price = models.FloatField()
+    qty = models.IntegerField()
+
+    class Meta:
+        db_table = 'order_items'

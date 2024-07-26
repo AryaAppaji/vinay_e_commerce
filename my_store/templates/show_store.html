@@ -3,17 +3,18 @@
   <head>
     <title>Vinay Zone - Shop</title>
     {% csrf_token %} {% load static %}
-    <link rel="stylesheet" href="{% static 'style2.css' %}" />
+    <link rel="stylesheet" href="{% static 'store_and_cart.css' %}" />
   </head>
   <body>
     <nav>
       <ul>
         <li><a href="#">Shop</a></li>
+        {% if cart_count > 0 %}
         <li><a href="{% url 'show_cart' %}">Cart
-          {% if cart_count > 0 %}
             ({{cart_count}})
-          {% endif %}
           </a></li>
+          {% endif %}
+
         <li><a href="#">My Orders</a></li>
         <li><a href="{% url 'registration_page' %}">Register</a></li>
         {% if login_status %}

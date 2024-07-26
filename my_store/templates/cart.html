@@ -3,17 +3,19 @@
   <head>
     <title>Vinay Zone - Cart</title>
     {% csrf_token %} {% load static %}
-    <link rel="stylesheet" href="{% static 'style2.css' %}" />
+    <link rel="stylesheet" href="{% static 'store_and_cart.css' %}" />
   </head>
   <body>
     <nav>
       <ul>
         <li><a href={% url "show_store" %}>Shop</a></li>
-        <li><a href="#">Cart
-          {% if cart_count > 0 %}
+        {% if cart_count > 0 %}
+        <li><a href="{% url 'show_cart' %}">Cart
             ({{cart_count}})
+          </a></li>
           {% endif %}
         <li><a href="#">My Orders</a></li>
+        <li><a href="{% url 'registration_page' %}">Register</a></li>
         {% if login_status %}
         <li><a href="{% url 'logout_user' %}">Logout</a></li>
         {% else %}
@@ -53,5 +55,16 @@
       </tr>
       {% endfor %}
     </table>
+    <br>
+
+    <center>
+      {% if cart_count <= 0 or login_status == False %}
+      <a href={% url "proceed_to_buy" %} class="proceed"><button class="proceed" disabled>Proceed To Buy</button></a>
+      <p>Please login to Continue</p>
+      {% else %}
+      <a href={% url "proceed_to_buy" %} class="proceed"><button class="proceed">Proceed To Buy</button></a>
+      {% endif %}
+      
+    </center>
   </body>
 </html>

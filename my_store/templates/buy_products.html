@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    {% csrf_token %}
+    {% load static %}
+    <link rel="stylesheet" href={% static 'buy_products.css' %}>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href={% url "show_store" %}>Shop</a></li>
+        {% if cart_count > 0 %}
+        <li><a href="{% url 'show_cart' %}">Cart
+            ({{cart_count}})
+          </a></li>
+          {% endif %}
+        <li><a href="#">My Orders</a></li>
+        <li><a href="{% url 'registration_page' %}">Register</a></li>
+        {% if login_status %}
+        <li><a href="{% url 'logout_user' %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url 'login_page' %}">Login</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    <br />
+    <center>
+    <form action={% url "submit_order" %} method="POST">
+      {% csrf_token %}
+      <table>
+        {% for product in products %}
+        <tr>
+          <td>
+            <img
+              src="{{MEDIA_URL}}{{product.image.url}}"
+              width="300px"
+              height="180px"
+            />
+          </td>
+          <td>Enter the stock you want to order for {{product.name}}</td>
+          <td>
+            <input type="number" size="2" name="quantity_{{ product.id }}"/>
+          </td>
+        </tr>
+        {% endfor %}
+        <tr>
+          <td align="center" colspan="3"><button type="submit">Place your order</button></td>
+        <tr>
+      </table>
+    </form>
+  </center>
+  </body>
+</html>

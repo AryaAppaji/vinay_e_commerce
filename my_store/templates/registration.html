@@ -6,13 +6,17 @@
     <title>Vinay Zone - Register</title>
     {% csrf_token %}
     {% load static %}
-    <link rel="stylesheet" href={% static "style3.css" %}>
+    <link rel="stylesheet" href={% static "registration.css" %}>
 </head>
 <body>
     <nav>
         <ul>
           <li><a href={% url "show_store" %}>Shop</a></li>
-          <li><a href="#">Cart</a></li>
+          {% if cart_count > 0 %}
+        <li><a href="{% url 'show_cart' %}">Cart
+            ({{cart_count}})
+          </a></li>
+          {% endif %}
           <li><a href="#">My Orders</a></li>
           <li><a href="{% url 'registration_page' %}">Register</a></li>
           {% if login_status %}

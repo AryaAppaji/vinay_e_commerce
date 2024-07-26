@@ -5,9 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vinay Zone - Login</title>
     {% csrf_token %}
-    {% load static %} <link rel="stylesheet" href={% static "style.css" %}>
+    {% load static %} <link rel="stylesheet" href={% static "login.css" %}>
   </head>
   <body>
+    <nav>
+      <ul>
+        <li><a href={% url "show_store" %}>Shop</a></li>
+        {% if cart_count > 0 %}
+        <li><a href="{% url 'show_cart' %}">Cart
+            ({{cart_count}})
+          </a></li>
+          {% endif %}
+        <li><a href="#">My Orders</a></li>
+        <li><a href="{% url 'registration_page' %}">Register</a></li>
+        {% if login_status %}
+        <li><a href="{% url 'logout_user' %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url 'login_page' %}">Login</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    <br>
   <center>
     <h1>Vinay Zone</h1>
     <fieldset>

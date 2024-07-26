@@ -52,3 +52,8 @@ li:hover{
     border-radius: 18px;
     border: solid black 1px;
 }
+
+.proceed{
+    border-radius: 18px;
+    background-image: linear-gradient(45deg, #02AABD, #00CDAC);
+}

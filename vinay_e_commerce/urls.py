@@ -30,7 +30,10 @@ urlpatterns = [
     path('register-user/', registerUser, name="register_user"),
     path('add-to-cart/', addToCart, name="add_to_cart"),
     path('remove-from-cart/<product_id>/', removeFromCart, name="remove_from_cart"),
-    path('cart/', getCart, name="show_cart")
+    path('cart/', getCart, name="show_cart"),
+    path('proceed-to-buy/', proceedToBuy, name="proceed_to_buy"),
+    path('submit-order/', submitOrder, name="submit_order"),
+    path('order-success/',orderSuccess, name="order_success")
 ]
 
 if settings.DEBUG:

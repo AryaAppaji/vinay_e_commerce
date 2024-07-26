@@ -3,7 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
-from .models import Product, BillingDetails
+from .models import Product, BillingDetails, Order, OrderItem
+from django.db.models import Sum
 
 def getLoginForm(request):
     return render(request, "login_page.html")
@@ -80,3 +81,52 @@ def getCart(request):
         "login_status": user_logged_in,
         "cart_count": len(items)
     })
+
+def proceedToBuy(request):
+    user_logged_in = request.user.is_authenticated
+    items = request.session.get("product_list")
+    products = Product.objects.filter(id__in=items)
+
+    return render(request, 'buy_products.html', {
+        "products": products,
+        "login_status": user_logged_in,
+        "cart_count": len(items)
+    })
+
+def submitOrder(request):
+    billing_details = BillingDetails.objects.get(user_id=request.user.id)
+    items = request.session.get("product_list", [])
+    items = sorted(items)
+    
+    # Assuming quantities are sent with a specific naming pattern like 'quantity_<product_id>'
+    quantities = {item: request.POST.get(f'quantity_{item}') for item in items}
+    
+    # Calculate the total amount for the order
+    total_amount = sum(Product.objects.get(id=item).price * int(quantities[item]) for item in items if quantities[item] is not None)
+    
+    create_order = Order.objects.create(
+        user=request.user,
+        customer_name=billing_details.name,
+        contact_number=billing_details.contact_no,
+        customer_address=billing_details.address,
+        total_amount=total_amount
+    )
+
+    for item in items:
+        product = Product.objects.get(id=item)
+        OrderItem.objects.create(
+            order=create_order,
+            item_name=product.name,
+            description=product.description,
+            image_path=product.image.url,
+            price=product.price,
+            qty=quantities[item]
+        )
+
+    # Clear the cart after creating the order
+    request.session["product_list"] = []
+
+    return redirect("order_success")
+
+def orderSuccess(request):
+    return render(request, "order_success.html")
