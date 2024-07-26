@@ -82,6 +82,7 @@ def getCart(request):
         "cart_count": len(items)
     })
 
+@login_required
 def proceedToBuy(request):
     user_logged_in = request.user.is_authenticated
     items = request.session.get("product_list")
@@ -93,6 +94,7 @@ def proceedToBuy(request):
         "cart_count": len(items)
     })
 
+@login_required
 def submitOrder(request):
     billing_details = BillingDetails.objects.get(user_id=request.user.id)
     items = request.session.get("product_list", [])
@@ -128,5 +130,6 @@ def submitOrder(request):
 
     return redirect("order_success")
 
+@login_required
 def orderSuccess(request):
     return render(request, "order_success.html")
