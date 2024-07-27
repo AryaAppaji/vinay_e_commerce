@@ -15,7 +15,7 @@
           </a></li>
           {% endif %}
 
-        <li><a href="#">My Orders</a></li>
+        <li><a href={% url "my_orders" %}>My Orders</a></li>
         <li><a href="{% url 'registration_page' %}">Register</a></li>
         {% if login_status %}
         <li><a href="{% url 'logout_user' %}">Logout</a></li>

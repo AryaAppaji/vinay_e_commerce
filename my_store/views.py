@@ -133,3 +133,12 @@ def submitOrder(request):
 @login_required
 def orderSuccess(request):
     return render(request, "order_success.html")
+
+@login_required
+def myOrders(request):
+    user = request.user
+    orders = Order.objects.filter(user=user).prefetch_related("items")
+    return render(request, "my_orders.html", {
+        "login_status": user.is_authenticated,
+        "orders": orders,
+    })

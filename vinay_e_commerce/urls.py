@@ -33,7 +33,8 @@ urlpatterns = [
     path('cart/', getCart, name="show_cart"),
     path('proceed-to-buy/', proceedToBuy, name="proceed_to_buy"),
     path('submit-order/', submitOrder, name="submit_order"),
-    path('order-success/',orderSuccess, name="order_success")
+    path('order-success/',orderSuccess, name="order_success"),
+    path('my-orders/', myOrders, name="my_orders")
 ]
 
 if settings.DEBUG:

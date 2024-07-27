@@ -17,7 +17,7 @@ class Product(models.Model):
 
 
 class BillingDetails(models.Model):
-    user_id = models.OneToOneField(User, models.CASCADE)
+    user_id = models.OneToOneField(User, models.CASCADE, related_name="details")
     name = models.CharField(max_length=50)
     address  = models.TextField()
     contact_no = models.CharField(max_length=10)
@@ -26,7 +26,7 @@ class BillingDetails(models.Model):
 
 
 class Order(models.Model):
-    user = models.ForeignKey(User, models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="orders")
     customer_name = models.CharField(max_length=30)
     contact_number = models.CharField(max_length=10)
     customer_address = models.TextField()
@@ -37,10 +37,10 @@ class Order(models.Model):
         db_table = 'orders'  
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="items")
     item_name = models.CharField(max_length=50)
     description = models.TextField()
-    image_path = models.CharField()
+    image_path = models.CharField(max_length=255)
     price = models.FloatField()
     qty = models.IntegerField()
 

@@ -10,11 +10,11 @@
       <ul>
         <li><a href={% url "show_store" %}>Shop</a></li>
         {% if cart_count > 0 %}
-        <li><a href="{% url 'show_cart' %}">Cart
+        <li><a href="#">Cart
             ({{cart_count}})
           </a></li>
           {% endif %}
-        <li><a href="#">My Orders</a></li>
+        <li><a href={% url "my_orders" %}>My Orders</a></li>
         <li><a href="{% url 'registration_page' %}">Register</a></li>
         {% if login_status %}
         <li><a href="{% url 'logout_user' %}">Logout</a></li>
