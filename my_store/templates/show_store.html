@@ -14,8 +14,9 @@
             ({{cart_count}})
           </a></li>
           {% endif %}
-
-        <li><a href={% url "my_orders" %}>My Orders</a></li>
+        {% if login_status %}
+          <li><a href={% url "my_orders" %}>My Orders</a></li>
+        {% endif %}
         <li><a href="{% url 'registration_page' %}">Register</a></li>
         {% if login_status %}
         <li><a href="{% url 'logout_user' %}">Logout</a></li>
@@ -24,14 +25,6 @@
         {% endif %}
       </ul>
     </nav>
-    <br />
-    <center>
-      <form action="" method="POST">
-        {% csrf_token %}
-        <input type="search" placeholder="Search..." size="50" />
-        <input type="submit" value="Search" />
-      </form>
-    </center>
     <br />
     <table>
       {% for product in products %}

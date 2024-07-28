@@ -34,7 +34,12 @@ class Order(models.Model):
     total_amount = models.FloatField()
 
     class Meta:
-        db_table = 'orders'  
+        db_table = 'orders'
+
+
+    def __str__(self) -> str:
+        return f"{self.id} - {self.user.username}"
+ 
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="items")

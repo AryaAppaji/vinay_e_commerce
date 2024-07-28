@@ -17,7 +17,9 @@
             ({{cart_count}})
           </a></li>
           {% endif %}
+          {% if login_status %}
           <li><a href={% url "my_orders" %}>My Orders</a></li>
+          {% endif %}
           <li><a href="#">Register</a></li>
           {% if login_status %}
           <li><a href="{% url 'logout_user' %}">Logout</a></li>

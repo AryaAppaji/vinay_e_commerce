@@ -25,13 +25,6 @@ nav ul li a{
     color: black;
 }
 
-input[type="search"]{
-    padding: 10px;
-    border-radius: 18px;
-    border: solid black 1px;
-    box-shadow:  inset 0px 0px 3px grey;
-}
-
 input[type="submit"],button{
     padding: 10px;
     border-radius: 18px;
