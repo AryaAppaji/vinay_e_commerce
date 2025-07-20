@@ -17,8 +17,10 @@ def loginUser(request):
         user = authenticate(request, username=username, password=password)
         
         if user is not None:
-            if user.id != 1:  # Check if user ID is not 1
-                login(request, user)
+            login(request, user)
+            if user.is_superuser:
+                return redirect("admin:index")
+            else:
                 return redirect("show_store")
         return render(request, "login_page.html", {
             "message": "Invalid Credentials"
@@ -31,11 +33,13 @@ def logoutUser(request):
 
 def showStore(request):
     user_logged_in = request.user.is_authenticated
+    is_superuser = request.user.is_superuser
     products = Product.objects.all()
     cart_items = request.session.get("product_list",[])
     return render(request, 'show_store.html', {
         "products": products,
         "login_status": user_logged_in,
+        "is_superuser": is_superuser,
         "cart_count": len(cart_items)
     })
 

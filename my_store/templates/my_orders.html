@@ -3,20 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <title>My Orders</title>
-    {% load static %}
-    <link rel="stylesheet" href= {% static 'my_orders.css' %}>
+    {% load static %} <link rel="stylesheet" href= {% static 'my_orders.css' %}>
   </head>
   <body>
     <nav>
       <ul>
-        <li><a href="admin/">Admin</a></li>
-        <li><a href={% url "show_store" %}>Shop</a></li>
-        {% if cart_count > 0 %}
-        <li><a href={% url "show_cart" %}>Cart ({{ cart_count }})</a></li>
-        {% endif %}
-        <li><a href="#">My Orders</a></li>
+        <li><a href="{%url 'admin:index'%}">Admin</a></li>
+        <li><a href="{% url 'show_store' %}">Shop</a></li>
+        {% if cart_count > 0 %} {%if not is_superuser%}
+        <li><a href="{% url 'show_cart' %}">Cart ({{cart_count}}) </a></li>
+        {%endif%} {% endif %} {% if login_status %} {%if not is_superuser%}
+        <li><a href="{% url 'my_orders' %}">My Orders</a></li>
+        {%endif%} {% endif %} {% if not login_status %}
         <li><a href="{% url 'registration_page' %}">Register</a></li>
-        {% if login_status %}
+        {% endif %} {% if login_status %}
         <li><a href="{% url 'logout_user' %}">Logout</a></li>
         {% else %}
         <li><a href="{% url 'login_page' %}">Login</a></li>

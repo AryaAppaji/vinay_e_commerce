@@ -6,20 +6,28 @@
     <title>Vinay Zone - Buy Products</title>
     {% csrf_token %}
     {% load static %}
-    <link rel="stylesheet" href={% static 'buy_products.css' %}>
+    <link rel="stylesheet" href="{% static 'buy_products.css' %}">
   </head>
   <body>
     <nav>
       <ul>
-        <li><a href="admin/">Admin</a></li>
-        <li><a href={% url "show_store" %}>Shop</a></li>
+        <li><a href="{%url 'admin:index'%}">Admin</a></li>
+        <li><a href="{% url 'show_store' %}">Shop</a></li>
         {% if cart_count > 0 %}
+        {%if not is_superuser%}
         <li><a href="{% url 'show_cart' %}">Cart
             ({{cart_count}})
           </a></li>
+          {%endif%}
           {% endif %}
-        <li><a href="my_orders">My Orders</a></li>
+        {% if login_status %}
+        {%if not is_superuser%}
+          <li><a href="{% url 'my_orders' %}">My Orders</a></li>
+          {%endif%}
+        {% endif %}
+        {% if not login_status %}
         <li><a href="{% url 'registration_page' %}">Register</a></li>
+        {% endif %}
         {% if login_status %}
         <li><a href="{% url 'logout_user' %}">Logout</a></li>
         {% else %}

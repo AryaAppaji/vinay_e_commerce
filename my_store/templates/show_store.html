@@ -8,17 +8,24 @@
   <body>
     <nav>
       <ul>
-        <li><a href="admin/">Admin</a></li>
+        <li><a href="{%url 'admin:index'%}">Admin</a></li>
         <li><a href="#">Shop</a></li>
         {% if cart_count > 0 %}
+        {%if not is_superuser%}
         <li><a href="{% url 'show_cart' %}">Cart
             ({{cart_count}})
           </a></li>
+          {%endif%}
           {% endif %}
         {% if login_status %}
-          <li><a href={% url "my_orders" %}>My Orders</a></li>
+        {%if not is_superuser%}
+          <li><a href="{% url 'my_orders' %}">My Orders</a></li>
+          {%endif%}
         {% endif %}
+        {% if not login_status %}
         <li><a href="{% url 'registration_page' %}">Register</a></li>
+        {% endif %}
+        
         {% if login_status %}
         <li><a href="{% url 'logout_user' %}">Logout</a></li>
         {% else %}
@@ -44,9 +51,15 @@
           <br />
           <form action={% url "add_to_cart" %} method="POST">
             {% csrf_token %}
+            {%if is_superuser%}
+            <button type="submit" name="product_id" value="{{product.id}}" id="add_to_cart" disabled>
+              Add to Cart
+            </button>
+            {%else%}
             <button type="submit" name="product_id" value="{{product.id}}" id="add_to_cart">
               Add to Cart
             </button>
+            {%endif%}
           </form>
         </td>
       </tr>
